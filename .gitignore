@@ -1,0 +1,36 @@
+## --- Residuos de Compilación ---
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+## --- Visual Studio ---
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.vstoken
+
+## --- Paquetes NuGet ---
+*.nupkg
+# Se recomienda restaurar paquetes, no guardarlos en el repo
+**/packages/*
+!**/packages/build/
+
+## --- Archivos generados por MSBuild ---
+*.aps
+*.pdb
+*.log
+*.tlog
+*.lastbuildstate
+
+## --- Otros archivos de entorno ---
+.env
+.vsconfig
+
+## --- Archivos de sistema ---
+[Tt]humbs.db
+Desktop.ini
