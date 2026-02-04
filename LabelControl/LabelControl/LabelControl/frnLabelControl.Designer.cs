@@ -42,6 +42,7 @@
             this.lblControl6 = new DevExpress.XtraEditors.LabelControl();
             this.btnSuperTip = new System.Windows.Forms.Button();
             this.lblComplexSuperTip = new DevExpress.XtraEditors.LabelControl();
+            this.lblControl9 = new DevExpress.XtraEditors.LabelControl();
             this.SuspendLayout();
             // 
             // lblControl1
@@ -131,11 +132,28 @@
             this.lblComplexSuperTip.TabIndex = 6;
             this.lblComplexSuperTip.Text = "Complex SuperTip ";
             // 
+            // lblControl9
+            // 
+            this.lblControl9.Appearance.FontStyleDelta = System.Drawing.FontStyle.Underline;
+            this.lblControl9.Appearance.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+            this.lblControl9.Appearance.Options.UseBackColor = true;
+            this.lblControl9.Appearance.Options.UseFont = true;
+            this.lblControl9.Appearance.Options.UseTextOptions = true;
+            this.lblControl9.Appearance.TextOptions.Trimming = DevExpress.Utils.Trimming.EllipsisCharacter;
+            this.lblControl9.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftTop;
+            this.lblControl9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("lblControl9.ImageOptions.Image")));
+            this.lblControl9.Location = new System.Drawing.Point(42, 275);
+            this.lblControl9.Name = "lblControl9";
+            this.lblControl9.Size = new System.Drawing.Size(135, 20);
+            this.lblControl9.TabIndex = 7;
+            this.lblControl9.Text = "LabelControl with image";
+            // 
             // frnLabelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(424, 354);
+            this.Controls.Add(this.lblControl9);
             this.Controls.Add(this.lblComplexSuperTip);
             this.Controls.Add(this.btnSuperTip);
             this.Controls.Add(this.lblControl6);
@@ -162,6 +180,7 @@
         private DevExpress.XtraEditors.LabelControl lblControl6;
         private System.Windows.Forms.Button btnSuperTip;
         private DevExpress.XtraEditors.LabelControl lblComplexSuperTip;
+        private DevExpress.XtraEditors.LabelControl lblControl9;
     }
 }
 
