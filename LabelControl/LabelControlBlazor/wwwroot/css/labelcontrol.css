@@ -1,0 +1,207 @@
+/* LabelControl Component Styles */
+
+.label-control-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 5px 0;
+}
+
+.label-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 4px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 13px;
+  color: #000;
+}
+
+/* Border Styles */
+.label-control.border-flat {
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+}
+
+.label-control.border-office2003 {
+  border: 1px solid #8b9bb4;
+  background-color: #fff;
+}
+
+.label-control.border-simple {
+  border: 1px solid #000;
+}
+
+/* Text Alignment */
+.label-control.text-left {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.label-control.text-center {
+  text-align: center;
+  justify-content: center;
+}
+
+.label-control.text-right {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+/* Image Alignment */
+.label-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.label-control.image-left-top {
+  align-items: flex-start;
+}
+
+.label-control.image-left-center {
+  align-items: center;
+}
+
+.label-control.image-left-bottom {
+  align-items: flex-end;
+}
+
+.label-control.image-right-top,
+.label-control.image-right-center,
+.label-control.image-right-bottom {
+  flex-direction: row-reverse;
+}
+
+/* Text Ellipsis */
+.label-text.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* SuperTip Styles */
+.supertip-container {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 1000;
+  background-color: #fff;
+  border: 1px solid #767676;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.label-control-wrapper:hover .supertip-container {
+  opacity: 1;
+  visibility: visible;
+}
+
+.supertip-title {
+  font-weight: bold;
+  font-size: 13px;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+}
+
+.supertip-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 4px 0;
+  color: #333;
+  line-height: 1.4;
+}
+
+.supertip-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.supertip-separator {
+  margin: 6px 0;
+  border: none;
+  border-top: 1px solid #d0d0d0;
+}
+
+/* Demo Page Styles */
+.demo-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.demo-container h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.demo-container > p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.demo-section {
+  margin: 25px 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.demo-section h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #555;
+  font-size: 16px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 8px 0 0 10px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .demo-container {
+    padding: 10px;
+  }
+
+  .supertip-container {
+    max-width: 250px;
+  }
+}

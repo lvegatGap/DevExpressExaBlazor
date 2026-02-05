@@ -1,0 +1,181 @@
+@using LabelControlBlazor.Models
+@namespace LabelControlBlazor.Components
+
+<div class="label-control-wrapper @CssClass" 
+     style="@GetStyleString()"
+     @onmouseenter="OnMouseEnter"
+     @onmouseleave="OnMouseLeave">
+    
+    <span class="label-control @BorderStyleClass @GetTextAlignmentClass()" 
+          style="@GetLabelStyleString()">
+        
+        @if (!string.IsNullOrEmpty(ImagePath))
+        {
+            <img src="@ImagePath" alt="" class="label-icon @ImageAlignToTextClass" />
+        }
+        
+        @if (!string.IsNullOrEmpty(Text))
+        {
+            if (AutoEllipsis && !string.IsNullOrEmpty(Width))
+            {
+                <span class="label-text ellipsis" title="@Text">@Text</span>
+            }
+            else
+            {
+                <span class="label-text">@Text</span>
+            }
+        }
+        else
+        {
+            @ChildContent
+        }
+    </span>
+
+    @if (ShowSuperTip && SuperTip != null && SuperTip.HasContent)
+    {
+        <div class="supertip-container @(SuperTip.CssClass)" style="max-width: @(SuperTip.MaxWidth)px;">
+            @foreach (var item in SuperTip.Items)
+            {
+                @if (item.Type == SuperTipItemType.Title)
+                {
+                    <div class="supertip-title @(item.CssClass)">
+                        @item.Text
+                    </div>
+                }
+                else if (item.Type == SuperTipItemType.Content)
+                {
+                    <div class="supertip-content @(item.CssClass)">
+                        @if (!string.IsNullOrEmpty(item.IconPath))
+                        {
+                            <img src="@item.IconPath" alt="" class="supertip-icon" />
+                        }
+                        @if (!string.IsNullOrEmpty(item.IconBase64))
+                        {
+                            <img src="data:image/png;base64,@item.IconBase64" alt="" class="supertip-icon" />
+                        }
+                        <span>@item.Text</span>
+                    </div>
+                }
+                else if (item.Type == SuperTipItemType.Separator)
+                {
+                    <hr class="supertip-separator" />
+                }
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string? Text { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public string? CssClass { get; set; }
+    
+    // Layout & Sizing
+    [Parameter] public string? Width { get; set; }
+    [Parameter] public string? Height { get; set; }
+    [Parameter] public LabelAutoSizeMode AutoSizeMode { get; set; } = LabelAutoSizeMode.Default;
+    [Parameter] public bool AutoEllipsis { get; set; } = false;
+    
+    // Appearance
+    [Parameter] public BorderStyle BorderStyle { get; set; } = BorderStyle.None;
+    [Parameter] public HorizontalAlignment TextAlignment { get; set; } = HorizontalAlignment.Left;
+    [Parameter] public TextTrimming Trimming { get; set; } = TextTrimming.None;
+    [Parameter] public string? FontFamily { get; set; }
+    [Parameter] public string? FontSize { get; set; }
+    [Parameter] public bool Underline { get; set; } = false;
+    [Parameter] public string? ForeColor { get; set; }
+    [Parameter] public string? BackColor { get; set; }
+    
+    // Image
+    [Parameter] public string? ImagePath { get; set; }
+    [Parameter] public ImageAlignToText ImageAlignToText { get; set; } = ImageAlignToText.LeftCenter;
+    
+    // SuperTip
+    [Parameter] public SuperTip? SuperTip { get; set; }
+    
+    private bool ShowSuperTip = false;
+
+    private void OnMouseEnter()
+    {
+        ShowSuperTip = true;
+    }
+
+    private void OnMouseLeave()
+    {
+        ShowSuperTip = false;
+    }
+
+    private string BorderStyleClass => BorderStyle switch
+    {
+        BorderStyle.Flat => "border-flat",
+        BorderStyle.Office2003 => "border-office2003",
+        BorderStyle.Simple => "border-simple",
+        _ => ""
+    };
+
+    private string ImageAlignToTextClass => ImageAlignToText switch
+    {
+        ImageAlignToText.LeftTop => "image-left-top",
+        ImageAlignToText.LeftCenter => "image-left-center",
+        ImageAlignToText.LeftBottom => "image-left-bottom",
+        ImageAlignToText.RightTop => "image-right-top",
+        ImageAlignToText.RightCenter => "image-right-center",
+        ImageAlignToText.RightBottom => "image-right-bottom",
+        _ => "image-left-center"
+    };
+
+    private string GetTextAlignmentClass() => TextAlignment switch
+    {
+        HorizontalAlignment.Center => "text-center",
+        HorizontalAlignment.Right => "text-right",
+        _ => "text-left"
+    };
+
+    private string GetStyleString()
+    {
+        var styles = new List<string>();
+        
+        if (!string.IsNullOrEmpty(Width) && AutoSizeMode != LabelAutoSizeMode.Horizontal)
+            styles.Add($"width: {Width}");
+        
+        if (!string.IsNullOrEmpty(Height) && AutoSizeMode != LabelAutoSizeMode.Vertical)
+            styles.Add($"height: {Height}");
+        
+        return string.Join("; ", styles);
+    }
+
+    private string GetLabelStyleString()
+    {
+        var styles = new List<string>();
+        
+        if (!string.IsNullOrEmpty(FontFamily))
+            styles.Add($"font-family: {FontFamily}");
+        
+        if (!string.IsNullOrEmpty(FontSize))
+            styles.Add($"font-size: {FontSize}");
+        
+        if (Underline)
+            styles.Add("text-decoration: underline");
+        
+        if (!string.IsNullOrEmpty(ForeColor))
+            styles.Add($"color: {ForeColor}");
+        
+        if (!string.IsNullOrEmpty(BackColor))
+            styles.Add($"background-color: {BackColor}");
+        
+        if (AutoEllipsis)
+            styles.Add("overflow: hidden; white-space: nowrap; text-overflow: ellipsis");
+        
+        switch (Trimming)
+        {
+            case TextTrimming.EllipsisCharacter:
+                styles.Add("text-overflow: ellipsis; overflow: hidden");
+                break;
+            case TextTrimming.EllipsisWord:
+                styles.Add("text-overflow: ellipsis; overflow: hidden; word-wrap: break-word");
+                break;
+        }
+        
+        return string.Join("; ", styles);
+    }
+}

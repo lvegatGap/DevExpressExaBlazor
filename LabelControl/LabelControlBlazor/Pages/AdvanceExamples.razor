@@ -1,0 +1,137 @@
+@page "/advanced-example"
+@using LabelControlBlazor.Components
+@using LabelControlBlazor.Models
+
+<h2>Ejemplos Avanzados de LabelControl con SuperTip</h2>
+
+@* Ejemplo 1: SuperTip con documentación de API *@
+<div class="example-section">
+    <h3>Documentación de API (Tooltip Rico)</h3>
+    <LabelControl
+        Text="GetUserById(int id)"
+        SuperTip="@apiDocTip"
+        FontFamily="Consolas, monospace"
+        ForeColor="#0066cc" />
+</div>
+
+@* Ejemplo 2: SuperTip con Warnings *@
+<div class="example-section">
+    <h3>Warning Tooltip</h3>
+    <LabelControl
+        Text="⚠️ Important Action"
+        SuperTip="@warningTip"
+        ForeColor="#ff6600" />
+</div>
+
+@* Ejemplo 3: SuperTip Dinámico con Datos *@
+<div class="example-section">
+    <h3>Información de Usuario (Dinámico)</h3>
+    <LabelControl
+        Text="@($"Usuario: {currentUser}")"
+        SuperTip="@userInfoTip"
+        Width="200px" />
+
+    <button @onclick="ChangeUser">Cambiar Usuario</button>
+</div>
+
+@* Ejemplo 4: Label con Imagen y SuperTip *@
+<div class="example-section">
+    <h3>Notificación con Icono</h3>
+    <LabelControl
+        Text="3 mensajes nuevos"
+        ImagePath="@notificationIcon"
+        ImageAlignToText="ImageAlignToText.LeftCenter"
+        SuperTip="@notificationTip" />
+</div>
+
+@code {
+    private SuperTip apiDocTip = new SuperTip();
+    private SuperTip warningTip = new SuperTip();
+    private SuperTip userInfoTip = new SuperTip();
+    private SuperTip notificationTip = new SuperTip();
+
+    private string currentUser = "John Doe";
+    private int messageCount = 3;
+
+    // Icono SVG inline para notificaciones
+    private string notificationIcon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ff6b6b' viewBox='0 0 16 16'%3E%3Cpath d='M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z'/%3E%3C/svg%3E";
+
+    protected override void OnInitialized()
+    {
+        // SuperTip para documentación de API
+        apiDocTip = new SuperTip()
+            .AddTitle("GetUserById Method")
+            .AddContent("Obtiene un usuario por su ID único.", "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%234CAF50' viewBox='0 0 16 16'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z'/%3E%3C/svg%3E")
+            .AddSeparator()
+            .AddContent("Parámetros:")
+            .AddContent("  • id (int): ID del usuario")
+            .AddSeparator()
+            .AddContent("Retorna: User object o null");
+
+        // SuperTip de advertencia
+        warningTip = new SuperTip()
+            .AddTitle("⚠️ Advertencia")
+            .AddContent("Esta acción no se puede deshacer.")
+            .AddSeparator()
+            .AddContent("Asegúrese de tener un respaldo antes de continuar.");
+
+        // SuperTip con información de usuario
+        UpdateUserInfoTip();
+
+        // SuperTip para notificaciones
+        UpdateNotificationTip();
+    }
+
+    private void ChangeUser()
+    {
+        currentUser = currentUser == "John Doe" ? "Jane Smith" : "John Doe";
+        UpdateUserInfoTip();
+    }
+
+    private void UpdateUserInfoTip()
+    {
+        userInfoTip = new SuperTip()
+            .AddTitle($"Perfil de {currentUser}")
+            .AddContent($"Email: {currentUser.ToLower().Replace(" ", ".")}@example.com")
+            .AddContent("Rol: Administrador")
+            .AddSeparator()
+            .AddContent("Último acceso: Hoy a las 10:30 AM");
+    }
+
+    private void UpdateNotificationTip()
+    {
+        notificationTip = new SuperTip()
+            .AddTitle("Mensajes Nuevos")
+            .AddContent("• María: \"¿Revisaste el reporte?\"")
+            .AddContent("• Carlos: \"Reunión a las 3 PM\"")
+            .AddContent("• Sistema: \"Actualización disponible\"");
+    }
+}
+
+<style>
+    .example-section {
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-left: 4px solid #007bff;
+    }
+
+    .example-section h3 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    button {
+        margin-left: 10px;
+        padding: 5px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>

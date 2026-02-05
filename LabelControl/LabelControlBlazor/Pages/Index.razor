@@ -1,0 +1,108 @@
+@page "/"
+@using LabelControlBlazor.Components
+@using LabelControlBlazor.Models
+
+<PageTitle>LabelControl Demo - Blazor</PageTitle>
+
+<div class="demo-container">
+    <h1>LabelControl Demo - Blazor Version</h1>
+    <p>Equivalente al proyecto Windows Forms con DevExpress</p>
+
+    <div class="demo-section">
+        <h3>1. BorderStyle = Flat</h3>
+        <LabelControl 
+            Text="BorderStyle = Flat"
+            BorderStyle="BorderStyle.Flat" />
+    </div>
+
+    <div class="demo-section">
+        <h3>2. Load from Resources</h3>
+        <LabelControl Text="Load from Resources" />
+    </div>
+
+    <div class="demo-section">
+        <h3>3. TextOptions.HAlignment = Center</h3>
+        <LabelControl 
+            Text="TextOptions.HAlignment = Center"
+            BorderStyle="BorderStyle.Office2003"
+            TextAlignment="HorizontalAlignment.Center"
+            Width="200px"
+            Height="20px"
+            AutoSizeMode="LabelAutoSizeMode.None" />
+    </div>
+
+    <div class="demo-section">
+        <h3>4. AutoEllipsis = true</h3>
+        <LabelControl 
+            Text="AutoEllipsis true - This is a very long text that should be truncated"
+            AutoEllipsis="true"
+            Width="150px"
+            AutoSizeMode="LabelAutoSizeMode.None" />
+    </div>
+
+    <div class="demo-section">
+        <h3>5. AutoSizeMode = Horizontal</h3>
+        <LabelControl 
+            Text="AutoSizeMode = Horizontal"
+            AutoSizeMode="LabelAutoSizeMode.Horizontal" />
+    </div>
+
+    <div class="demo-section">
+        <h3>6. SuperTip (hover para ver)</h3>
+        <LabelControl 
+            Text="SuperTip"
+            SuperTip="@simpleSuperTip" />
+        
+        <button class="btn btn-primary" @onclick="ApplySuperTip">Apply SuperTip</button>
+    </div>
+
+    <div class="demo-section">
+        <h3>7. Complex SuperTip (hover para ver)</h3>
+        <LabelControl 
+            Text="Complex SuperTip"
+            SuperTip="@complexSuperTip" />
+    </div>
+
+    <div class="demo-section">
+        <h3>8. LabelControl creado dinámicamente (AutoSizeMode = Vertical)</h3>
+        <LabelControl 
+            Text="Created on Page Load, AutoSizeMode = Vertical"
+            FontFamily="Tahoma"
+            FontSize="8pt"
+            Width="120px"
+            Height="5px"
+            AutoSizeMode="LabelAutoSizeMode.Vertical" />
+    </div>
+
+    <div class="demo-section">
+        <h3>9. LabelControl con imagen</h3>
+        <LabelControl 
+            Text="LabelControl with image"
+            ImagePath="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23007bff' viewBox='0 0 16 16'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z'/%3E%3C/svg%3E"
+            ImageAlignToText="ImageAlignToText.LeftTop"
+            Underline="true"
+            Trimming="TextTrimming.EllipsisCharacter" />
+    </div>
+</div>
+
+@code {
+    private SuperTip? simpleSuperTip;
+    private SuperTip complexSuperTip = new SuperTip();
+
+    protected override void OnInitialized()
+    {
+        // Complex SuperTip - equivalente al lblComplexSuperTip del Windows Forms
+        complexSuperTip = new SuperTip()
+            .AddTitle("This is a title Item")
+            .AddContent("This is a Content Item.", "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ffa500' viewBox='0 0 16 16'%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z'/%3E%3C/svg%3E")
+            .AddSeparator()
+            .AddContent("This is another Content Item.");
+    }
+
+    private void ApplySuperTip()
+    {
+        // Equivalente al btnSuperTip_Click del Windows Forms
+        simpleSuperTip = new SuperTip("SuperTip");
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,64 @@
+﻿@page "/Second"
+@using LabelControlBlazor.Components
+@using LabelControlBlazor.Models
+
+<h2>Creación Dinámica de Labels</h2>
+
+<button @onclick="AddLabel">Agregar Label</button>
+<button @onclick="ClearLabels">Limpiar Todo</button>
+
+<div class="labels-container">
+    @foreach (var label in labels)
+    {
+        <LabelControl Text="@label.Text"
+                      SuperTip="@label.Tip"
+                      BorderStyle="BorderStyle.Flat"
+                      Width="200px"
+                      CssClass="dynamic-label" />
+    }
+</div>
+
+@code {
+    private List<LabelData> labels = new List<LabelData>();
+    private int labelCounter = 0;
+
+    private void AddLabel()
+    {
+        labelCounter++;
+        var tip = new SuperTip()
+            .AddTitle($"Label #{labelCounter}")
+            .AddContent($"Creado a las: {DateTime.Now:HH:mm:ss}");
+
+        labels.Add(new LabelData
+        {
+            Text = $"Label dinámico #{labelCounter}",
+            Tip = tip
+        });
+    }
+
+    private void ClearLabels()
+    {
+        labels.Clear();
+        labelCounter = 0;
+    }
+
+    private class LabelData
+    {
+        public string Text { get; set; } = "";
+        public SuperTip Tip { get; set; } = new SuperTip();
+    }
+}
+
+<style>
+    .labels-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dynamic-label {
+        animation: slideIn 0.3s ease-out;
+    }
+
+</style>
