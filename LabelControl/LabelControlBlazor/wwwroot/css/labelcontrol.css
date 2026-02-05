@@ -82,6 +82,16 @@
 }
 
 /* SuperTip Styles */
+.label-supertip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.label-supertip-wrapper:hover .supertip-container {
+  opacity: 1;
+  visibility: visible;
+}
+
 .supertip-container {
   position: absolute;
   top: calc(100% + 5px);
@@ -100,11 +110,8 @@
     opacity 0.2s ease-in-out,
     visibility 0.2s ease-in-out;
   pointer-events: none;
-}
-
-.label-control-wrapper:hover .supertip-container {
-  opacity: 1;
-  visibility: visible;
+  white-space: normal;
+  min-width: 200px;
 }
 
 .supertip-title {
@@ -204,4 +211,51 @@
   .supertip-container {
     max-width: 250px;
   }
+}
+
+/* Native Label Implementation Styles */
+.auto-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.auto-size-horizontal {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.auto-size-vertical {
+  display: inline-block;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.with-image {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.with-image img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.ellipsis-character {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+label.label-control {
+  cursor: default;
 }

@@ -1,0 +1,62 @@
+@using LabelControlBlazor.Models
+@namespace LabelControlBlazor.Components
+
+<div class="label-supertip-wrapper"
+     @onmouseenter="OnMouseEnter"
+     @onmouseleave="OnMouseLeave">
+    
+    @ChildContent
+
+    @if (ShowSuperTip && SuperTip != null && SuperTip.HasContent)
+    {
+        <div class="supertip-container @(SuperTip.CssClass)" style="max-width: @(SuperTip.MaxWidth)px;">
+            @foreach (var item in SuperTip.Items)
+            {
+                @if (item.Type == SuperTipItemType.Title)
+                {
+                    <div class="supertip-title @(item.CssClass)">
+                        @item.Text
+                    </div>
+                }
+                else if (item.Type == SuperTipItemType.Content)
+                {
+                    <div class="supertip-content @(item.CssClass)">
+                        @if (!string.IsNullOrEmpty(item.IconPath))
+                        {
+                            <img src="@item.IconPath" alt="" class="supertip-icon" />
+                        }
+                        @if (!string.IsNullOrEmpty(item.IconBase64))
+                        {
+                            <img src="data:image/png;base64,@item.IconBase64" alt="" class="supertip-icon" />
+                        }
+                        <span>@item.Text</span>
+                    </div>
+                }
+                else if (item.Type == SuperTipItemType.Separator)
+                {
+                    <hr class="supertip-separator" />
+                }
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public SuperTip? SuperTip { get; set; }
+    
+    private bool ShowSuperTip = false;
+
+    private void OnMouseEnter()
+    {
+        if (SuperTip != null && SuperTip.HasContent)
+        {
+            ShowSuperTip = true;
+        }
+    }
+
+    private void OnMouseLeave()
+    {
+        ShowSuperTip = false;
+    }
+}
