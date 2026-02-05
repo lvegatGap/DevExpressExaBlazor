@@ -5,12 +5,11 @@
 @using TestingDemos.Components
 @inherits ComponentBase
 @namespace TestingDemos.Components.Pages
-<WMFormComponent model="@this.model">
-    <WMLabelControlComponent model="@this.model.lnkRedColor"></WMLabelControlComponent>
-    <WMLinkLabelComponent model="@this.model.lnkHoverUnderline"></WMLinkLabelComponent>
+<WMFormComponent model="@this.model">    
+    @* <WMLinkLabelComponent model="@this.model.lnkHoverUnderline"></WMLinkLabelComponent>
     <WMLinkLabelComponent model="@this.model.lnkGreenColor"></WMLinkLabelComponent>
     <WMLinkLabelComponent model="@this.model.lnkLabelNeverUnderline"></WMLinkLabelComponent>
-    <WMButtonComponent model="@this.model.btnAddLinks"></WMButtonComponent>
+    <WMButtonComponent model="@this.model.btnAddLinks"></WMButtonComponent> *@
     <WMLabelControlComponent model="@this.model.lnkLabelEvent"></WMLabelControlComponent>
 </WMFormComponent>
 @code {
