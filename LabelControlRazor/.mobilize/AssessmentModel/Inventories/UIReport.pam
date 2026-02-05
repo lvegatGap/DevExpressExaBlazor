@@ -1,0 +1,4 @@
+Element,ProjectId,FileId,Count,Status
+System.Windows.Forms.LinkLabel,,,5,1
+System.Windows.Forms.Form,,,1,1
+System.Windows.Forms.Button,,,1,1

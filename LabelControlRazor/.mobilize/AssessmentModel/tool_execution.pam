@@ -1,0 +1,2 @@
+ExecutionId,ToolName,ToolVersion,AssemblyName,LogFile,FinalResult,ExceptionReport,StartTime,EndTime,SystemName
+c00ac39c-f43e-4141-ab02-874bef0f0b60,Winforms-Blazor,0.0.0.0,"Gap.BlazorCT.CodeProcessor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2d4fb36d6af9d047",,,,639041825853242970,0,IT-CR-ZF-1039

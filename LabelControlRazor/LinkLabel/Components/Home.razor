@@ -1,0 +1,21 @@
+
+@page "/"
+@using Microsoft.AspNetCore.Components.Web
+@using Telerik.Blazor.Components
+@using Gap.Blazor.Components
+
+<PageTitle>Home</PageTitle>
+
+<WMAppComp></WMAppComp>
+
+@code {
+    private bool isInitialized = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        isInitialized = true;
+        new frmLinkLabelTest().Show();;
+    }
+}
+

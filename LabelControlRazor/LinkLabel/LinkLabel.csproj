@@ -1,0 +1,28 @@
+
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+      <ItemGroup>
+                <PackageReference Include="Gap.Blazor.All" Version="2.35.72" />
+                <PackageReference Include="Telerik.Licensing" Version="1.6.35" />
+            </ItemGroup>
+    
+    
+    
+        <ItemGroup>
+                <Compile Remove="..\Stubs\**" />
+		<Content Remove="..\Stubs\**" />
+		<EmbeddedResource Remove="..\Stubs\**" />
+		<None Remove="..\Stubs\**" />
+            </ItemGroup>
+
+    <ItemGroup>
+                <ProjectReference Include="..\..\..\..\DevExpressBlazorDCP\backend\src\Gap.Blazor.DevE.Components\Gap.Blazor.DevE.Components.csproj" />
+                <ProjectReference Include="..\..\..\..\DevExpressBlazorDCP\backend\src\Gap.Blazor.DevE\Gap.Blazor.DevE.csproj" />
+                <ProjectReference Include="..\Stubs\Stubs.csproj" />
+            </ItemGroup>
+    </Project>

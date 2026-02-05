@@ -1,0 +1,25 @@
+@page "/frmLinkLabelTest"
+@using Gap.Blazor.Components
+@using Gap.Blazor.DevE.Components
+@rendermode RenderMode.InteractiveServer
+@using TestingDemos.Components
+@inherits ComponentBase
+@namespace TestingDemos.Components.Pages
+<WMFormComponent model="@this.model">
+    <WMLabelControlComponent model="@this.model.lnkRedColor"></WMLabelControlComponent>
+    <WMLinkLabelComponent model="@this.model.lnkHoverUnderline"></WMLinkLabelComponent>
+    <WMLinkLabelComponent model="@this.model.lnkGreenColor"></WMLinkLabelComponent>
+    <WMLinkLabelComponent model="@this.model.lnkLabelNeverUnderline"></WMLinkLabelComponent>
+    <WMButtonComponent model="@this.model.btnAddLinks"></WMButtonComponent>
+    <WMLabelControlComponent model="@this.model.lnkLabelEvent"></WMLabelControlComponent>
+</WMFormComponent>
+@code {
+    [Parameter]
+    public frmLinkLabelTest model { get; set; }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        model = model == null ? new frmLinkLabelTest() : model;
+        model.View = this.GetType();
+    }
+}
